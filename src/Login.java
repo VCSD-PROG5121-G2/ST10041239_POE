@@ -37,6 +37,11 @@ public class Login {
         return false;
     }
 
+    // Signout Handler
+    public void signOutUser() {
+        this.loggedIn = false;
+    }
+
     // Login Status handler
     public String returnLoginStatus() {
         if (this.loggedIn) {

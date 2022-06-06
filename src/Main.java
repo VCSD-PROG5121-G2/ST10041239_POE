@@ -20,7 +20,8 @@ public class Main {
                     JOptionPane.showMessageDialog(null, "Coming Soon");
                     break;
                 case "3":
-                    JOptionPane.showMessageDialog(null, "You've quite bye!");
+                    JOptionPane.showMessageDialog(null, "Thank you for using EasyKanban\nSee you next time!");
+                    login.signOutUser();
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "Invalid input, please try again.");
