@@ -1,7 +1,12 @@
 import javax.swing.*;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Main {
     static Login login = new Login();
+    static Task task = new Task();
 
     public static void main(String[] args) {
         // Signup and Login User
@@ -14,7 +19,8 @@ public class Main {
 
             switch (userOption) {
                 case "1":
-                    int amountOfTasks = Integer.parseInt(JOptionPane.showInputDialog(null, "Please enter the amount of Tasks you wish to create"));
+                    taskCreationHandler();
+                    task.printTasks();
                     break;
                 case "2":
                     JOptionPane.showMessageDialog(null, "Coming Soon");
@@ -30,7 +36,7 @@ public class Main {
     }
 
     // Sign Up Handler
-    public static void SignUpHandler() {
+    private static void SignUpHandler() {
         // Prompt for First Name and Last Name
         String firstName = JOptionPane.showInputDialog(null, "Enter First Name: ");
         String lastName = JOptionPane.showInputDialog(null, "Enter Last Name: ");
@@ -52,7 +58,7 @@ public class Main {
     }
 
     // Login Handler
-    public static void LoginHandler() {
+    private static void LoginHandler() {
         JOptionPane.showMessageDialog(null, "Login to account, pelase enter credentials");
 
         String username2 = JOptionPane.showInputDialog(null, "Enter Username: ");
@@ -63,5 +69,29 @@ public class Main {
         JOptionPane.showMessageDialog(null, loginStatus);
     }
 
-    //
+    // Task Creation Handler
+    private static void taskCreationHandler() {
+        int amountOfTasks = Integer.parseInt(JOptionPane.showInputDialog(null, "Please enter the amount of Tasks you wish to create"));
+
+        for (int i = 0; i < amountOfTasks; i++) {
+            // Capturing of core data
+            String taskName = JOptionPane.showInputDialog(null, "Please enter the Name of the Task");
+            String taskDeveloper = JOptionPane.showInputDialog(null, "Please enter the First and Last Name of the Developer assigned to the Task");
+            int taskDuration = Integer.parseInt(JOptionPane.showInputDialog(null, "Please enter the estimated Duration of the Task"));
+            String taskStatus = JOptionPane.showInputDialog(null, "Please enter the Status of the Task from the options:\n\n(1)To Do\n(2)Done\n(3)Doing\n\n");
+            String taskDescription = JOptionPane.showInputDialog(null, "Please enter the Description of the Task");
+
+            // Ensuring the Task Description is valid
+            while (!task.checkTaskDescription(taskDescription)) {
+                JOptionPane.showMessageDialog(null, "Please enter a task description of less than 50 characters");
+                taskDescription = JOptionPane.showInputDialog(null, "Please enter the Description of the Task");
+            }
+
+            String taskID = task.createTaskID(taskName, 0, taskDeveloper);
+
+            JOptionPane.showMessageDialog(null, "Task successfully captured");
+            TaskItem newTask = new TaskItem(taskName, 0,taskDescription, taskDeveloper, taskDuration, taskStatus, taskID);
+            task.addTask(newTask);
+        }
+    }
 }
