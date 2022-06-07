@@ -37,4 +37,9 @@ public class Task {
         String taskDetails = "Here are your Task's details:\n\nStatus: " + task.getStatus() + "\nDeveloper Details: " + task.getDeveloperDetails() + "\nTask Number: " + task.getNumber() + "\nName: " + task.getName() + "\nDescription: " + task.getDescription() + "\nID: " + task.getID() + "\nDuration: " + task.getDuration();
         JOptionPane.showMessageDialog(null, taskDetails);
     }
+
+    public void returnTotalHours() {
+
+        for (int i = )
+    }
 }

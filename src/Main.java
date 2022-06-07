@@ -11,8 +11,8 @@ public class Main {
 
     public static void main(String[] args) {
         // Signup and Login User
-//        SignUpHandler();
-//        LoginHandler();
+        SignUpHandler();
+        LoginHandler();
 
         // Loop to manage the Choices of the user
         while (login.returnLoginStatus() != "Username or Password incorreect, please try again.") {
@@ -24,7 +24,6 @@ public class Main {
             switch (userOption) {
                 case "1":
                     taskCreationHandler();
-//                    task.printTasks();
                     break;
                 case "2":
                     JOptionPane.showMessageDialog(null, "Coming Soon");
