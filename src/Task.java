@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.*;
 
 public class Task {
     // List of all the created Tasks
@@ -13,7 +14,7 @@ public class Task {
     // Ensures the Task Description is no more than 50 characters.
     // Returns True if Description is valid, False if Description is invalid
     public Boolean checkTaskDescription(String description) {
-        if (description.length() > 50) {
+        if (description.length() >= 50) {
             return false;
         }
 
@@ -30,5 +31,21 @@ public class Task {
         String id = nameSub + ":" + number + ":" + devSub;
 
         return id;
+    }
+
+    public void printTaskDetails(TaskItem task) {
+        String taskDetails = "Here are your Task's details:\n\nStatus: " + task.getStatus() + "\nDeveloper Details: " + task.getDeveloperDetails() + "\nTask Number: " + task.getNumber() + "\nName: " + task.getName() + "\nDescription: " + task.getDescription() + "\nID: " + task.getID() + "\nDuration: " + task.getDuration();
+        JOptionPane.showMessageDialog(null, taskDetails);
+    }
+
+    public int retrunTotalHours() {
+        int totalHours = 0;
+
+        for (int i = 0; i < this.taskItems.toArray().length; i++) {
+//            https://www.javatpoint.com/java-list
+            totalHours += taskItems.get(i).getDuration();
+        }
+
+        return totalHours;
     }
 }
