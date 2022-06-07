@@ -1,8 +1,4 @@
 import javax.swing.*;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class Main {
     // "Global" classes for Main to access
@@ -24,13 +20,12 @@ public class Main {
             switch (userOption) {
                 case "1":
                     taskCreationHandler();
-//                    task.printTasks();
                     break;
                 case "2":
                     JOptionPane.showMessageDialog(null, "Coming Soon");
                     break;
                 case "3":
-                    JOptionPane.showMessageDialog(null, "Thank you for using EasyKanban\nSee you next time!");
+                    JOptionPane.showMessageDialog(null, "Thank you for using EasyKanban\n\nSee you next time!");
                     login.signOutUser();
                     break;
                 default:
