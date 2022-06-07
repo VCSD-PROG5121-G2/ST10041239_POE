@@ -5,22 +5,26 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Main {
+    // "Global" classes for Main to access
     static Login login = new Login();
     static Task task = new Task();
 
     public static void main(String[] args) {
         // Signup and Login User
 //        SignUpHandler();
-//        LoginHandler();
+        LoginHandler();
 
+        // Loop to manage the Choices of the user
         while (login.returnLoginStatus() != "Username or Password incorreect, please try again.") {
+
             // Using a string to stop the program from crashing when non-numeric values are inputted
             String userOption = JOptionPane.showInputDialog(null, "Welcome to EasyKanban.\nEnter your choice:\n\n1: Add Task\n2:Show Report\n3:Quit\n\n");
 
+            // Used an Swtich statment as it less verbose than an If statement
             switch (userOption) {
                 case "1":
                     taskCreationHandler();
-                    task.printTasks();
+//                    task.printTasks();
                     break;
                 case "2":
                     JOptionPane.showMessageDialog(null, "Coming Soon");
@@ -61,18 +65,25 @@ public class Main {
     private static void LoginHandler() {
         JOptionPane.showMessageDialog(null, "Login to account, pelase enter credentials");
 
-        String username2 = JOptionPane.showInputDialog(null, "Enter Username: ");
-        String password2 = JOptionPane.showInputDialog(null, "Enter Password: ");
+        // Controlled loop so User can attempt multiple Logins
+        do {
+            // Capture Username and Password
+            String username = JOptionPane.showInputDialog(null, "Enter Username: ");
+            String password = JOptionPane.showInputDialog(null, "Enter Password: ");
 
-        login.loginUser(username2, password2);
-        String loginStatus = login.returnLoginStatus();
-        JOptionPane.showMessageDialog(null, loginStatus);
+            // Login User and print the Login status
+            login.loginUser(username, password);
+            String loginStatus = login.returnLoginStatus();
+            JOptionPane.showMessageDialog(null, loginStatus);
+
+        }while(login.returnLoginStatus() == "Username or Password incorreect, please try again.");
     }
 
     // Task Creation Handler
     private static void taskCreationHandler() {
         int amountOfTasks = Integer.parseInt(JOptionPane.showInputDialog(null, "Please enter the amount of Tasks you wish to create"));
 
+        // Controlled loop to repeat Task creations based on the amount of Tasks wished to be created by the User
         for (int i = 0; i < amountOfTasks; i++) {
             // Capturing of core data
             String taskName = JOptionPane.showInputDialog(null, "Please enter the Name of the Task");
@@ -87,11 +98,13 @@ public class Main {
                 taskDescription = JOptionPane.showInputDialog(null, "Please enter the Description of the Task");
             }
 
+            // Generating a respective TaskID for the newly created Task
             String taskID = task.createTaskID(taskName, 0, taskDeveloper);
 
-            JOptionPane.showMessageDialog(null, "Task successfully captured");
+            // TaskItem object is created & added to the array of the Task "manager" class
             TaskItem newTask = new TaskItem(taskName, 0,taskDescription, taskDeveloper, taskDuration, taskStatus, taskID);
             task.addTask(newTask);
+            JOptionPane.showMessageDialog(null, "Task successfully captured");
         }
     }
 }
