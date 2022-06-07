@@ -118,6 +118,7 @@ public class Main {
             task.printTaskDetails(newTask);
         }
 
+        // Displaying the total hours of created Tasks
         int totalHours = task.retrunTotalHours();
         JOptionPane.showMessageDialog(null, "Total Hours for Tasks entered: " + totalHours);
     }
