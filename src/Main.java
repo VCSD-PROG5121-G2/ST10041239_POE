@@ -12,7 +12,7 @@ public class Main {
     public static void main(String[] args) {
         // Signup and Login User
 //        SignUpHandler();
-        LoginHandler();
+//        LoginHandler();
 
         // Loop to manage the Choices of the user
         while (login.returnLoginStatus() != "Username or Password incorreect, please try again.") {
@@ -86,10 +86,23 @@ public class Main {
         // Controlled loop to repeat Task creations based on the amount of Tasks wished to be created by the User
         for (int i = 0; i < amountOfTasks; i++) {
             // Capturing of core data
+            String taskStatus;
             String taskName = JOptionPane.showInputDialog(null, "Please enter the Name of the Task");
             String taskDeveloper = JOptionPane.showInputDialog(null, "Please enter the First and Last Name of the Developer assigned to the Task");
             int taskDuration = Integer.parseInt(JOptionPane.showInputDialog(null, "Please enter the estimated Duration of the Task"));
-            String taskStatus = JOptionPane.showInputDialog(null, "Please enter the Status of the Task from the options:\n\n(1)To Do\n(2)Done\n(3)Doing\n\n");
+
+            // Ensure that the entered Task Status is valid
+            while(true) {
+                taskStatus = JOptionPane.showInputDialog(null, "Please enter the Status of the Task from the options:\n\n(1)To Do\n(2)Done\n(3)Doing\n\n");
+
+                if (taskStatus.equals("To Do") || taskStatus.equals("Done") || taskStatus.equals("Doing")) {
+                    break;
+                }
+
+                JOptionPane.showMessageDialog(null, "Invalid Status Entered please try again");
+                continue;
+            }
+
             String taskDescription = JOptionPane.showInputDialog(null, "Please enter the Description of the Task");
 
             // Ensuring the Task Description is valid
@@ -105,6 +118,9 @@ public class Main {
             TaskItem newTask = new TaskItem(taskName, 0,taskDescription, taskDeveloper, taskDuration, taskStatus, taskID);
             task.addTask(newTask);
             JOptionPane.showMessageDialog(null, "Task successfully captured");
+
+            // Print the Task details of the currently created
+            task.printTaskDetails(newTask);
         }
     }
 }
