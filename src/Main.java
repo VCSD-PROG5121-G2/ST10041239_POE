@@ -1,8 +1,4 @@
 import javax.swing.*;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class Main {
     // "Global" classes for Main to access
@@ -13,8 +9,6 @@ public class Main {
         // Signup and Login User
         SignUpHandler();
         LoginHandler();
-
-
 
         // Loop to manage the Choices of the user
         while (login.returnLoginStatus() != "Username or Password incorreect, please try again.") {
@@ -31,7 +25,7 @@ public class Main {
                     JOptionPane.showMessageDialog(null, "Coming Soon");
                     break;
                 case "3":
-                    JOptionPane.showMessageDialog(null, "Thank you for using EasyKanban\nSee you next time!");
+                    JOptionPane.showMessageDialog(null, "Thank you for using EasyKanban\n\nSee you next time!");
                     login.signOutUser();
                     break;
                 default:
@@ -93,16 +87,16 @@ public class Main {
             int taskDuration = Integer.parseInt(JOptionPane.showInputDialog(null, "Please enter the estimated Duration of the Task"));
 
             // Ensure that the entered Task Status is valid
-//            while(true) {
-//                taskStatus = JOptionPane.showInputDialog(null, "Please enter the Status of the Task from the options:\n\n(1)To Do\n(2)Done\n(3)Doing\n\n");
-//
-//                if (taskStatus.equals("To Do") || taskStatus.equals("Done") || taskStatus.equals("Doing")) {
-//                    break;
-//                }
-//
-//                JOptionPane.showMessageDialog(null, "Invalid Status Entered please try again");
-//                continue;
-//            }
+            while(true) {
+                taskStatus = JOptionPane.showInputDialog(null, "Please enter the Status of the Task from the options:\n\n(1)To Do\n(2)Done\n(3)Doing\n\n");
+
+                if (taskStatus.equals("To Do") || taskStatus.equals("Done") || taskStatus.equals("Doing")) {
+                    break;
+                }
+
+                JOptionPane.showMessageDialog(null, "Invalid Status Entered please try again");
+                continue;
+            }
 
             String taskDescription = JOptionPane.showInputDialog(null, "Please enter the Description of the Task");
 
@@ -113,15 +107,19 @@ public class Main {
             }
 
             // Generating a respective TaskID for the newly created Task
-            String taskID = task.createTaskID(taskName, 0, taskDeveloper);
+            String taskID = task.createTaskID(taskName, i, taskDeveloper);
 
             // TaskItem object is created & added to the array of the Task "manager" class
-            TaskItem newTask = new TaskItem(taskName, 0,taskDescription, taskDeveloper, taskDuration, taskStatus, taskID);
+            TaskItem newTask = new TaskItem(taskName, i,taskDescription, taskDeveloper, taskDuration, taskStatus, taskID);
             task.addTask(newTask);
             JOptionPane.showMessageDialog(null, "Task successfully captured");
 
             // Print the Task details of the currently created
             task.printTaskDetails(newTask);
         }
+
+        // Displaying the total hours of created Tasks
+        int totalHours = task.retrunTotalHours();
+        JOptionPane.showMessageDialog(null, "Total Hours for Tasks entered: " + totalHours);
     }
 }

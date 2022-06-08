@@ -3,11 +3,11 @@ import java.util.regex.Pattern;
 
 public class Login {
     // Private fields to store User's information
-    private String firstName = "Charles";
-    private String lastName = "Rossouw";
-    private String username = "ch_5";
-    private String password = "FakePassword123$";
-    private Boolean loggedIn = true;
+    private String firstName;
+    private String lastName;
+    private String username;
+    private String password;
+    private Boolean loggedIn = false;
 
     // Verification control
     public String registerUser(String firstName, String lastName, String username, String password) {
