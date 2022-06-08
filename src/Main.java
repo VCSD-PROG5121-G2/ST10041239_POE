@@ -115,7 +115,8 @@ public class Main {
             JOptionPane.showMessageDialog(null, "Task successfully captured");
 
             // Print the Task details of the currently created
-            task.printTaskDetails(newTask);
+            String details = task.printTaskDetails(newTask);
+            JOptionPane.showMessageDialog(null, details);
         }
 
         // Displaying the total hours of created Tasks

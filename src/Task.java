@@ -42,9 +42,9 @@ public class Task {
     }
 
     // Prints out the full details of the Task passed in
-    public void printTaskDetails(TaskItem task) {
+    public String printTaskDetails(TaskItem task) {
         String taskDetails = "Here are your Task's details:\n\nStatus: " + task.getStatus() + "\nDeveloper Details: " + task.getDeveloperDetails() + "\nTask Number: " + task.getNumber() + "\nName: " + task.getName() + "\nDescription: " + task.getDescription() + "\nID: " + task.getID() + "\nDuration: " + task.getDuration() + "hrs";
-        JOptionPane.showMessageDialog(null, taskDetails);
+        return taskDetails;
     }
 
     // Retruns the total hours/duration of the Task items in taskItems array
