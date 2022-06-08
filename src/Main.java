@@ -14,6 +14,8 @@ public class Main {
         SignUpHandler();
         LoginHandler();
 
+
+
         // Loop to manage the Choices of the user
         while (login.returnLoginStatus() != "Username or Password incorreect, please try again.") {
 
@@ -91,16 +93,16 @@ public class Main {
             int taskDuration = Integer.parseInt(JOptionPane.showInputDialog(null, "Please enter the estimated Duration of the Task"));
 
             // Ensure that the entered Task Status is valid
-            while(true) {
-                taskStatus = JOptionPane.showInputDialog(null, "Please enter the Status of the Task from the options:\n\n(1)To Do\n(2)Done\n(3)Doing\n\n");
-
-                if (taskStatus.equals("To Do") || taskStatus.equals("Done") || taskStatus.equals("Doing")) {
-                    break;
-                }
-
-                JOptionPane.showMessageDialog(null, "Invalid Status Entered please try again");
-                continue;
-            }
+//            while(true) {
+//                taskStatus = JOptionPane.showInputDialog(null, "Please enter the Status of the Task from the options:\n\n(1)To Do\n(2)Done\n(3)Doing\n\n");
+//
+//                if (taskStatus.equals("To Do") || taskStatus.equals("Done") || taskStatus.equals("Doing")) {
+//                    break;
+//                }
+//
+//                JOptionPane.showMessageDialog(null, "Invalid Status Entered please try again");
+//                continue;
+//            }
 
             String taskDescription = JOptionPane.showInputDialog(null, "Please enter the Description of the Task");
 
