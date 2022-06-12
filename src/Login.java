@@ -7,7 +7,7 @@ public class Login {
     private String lastName;
     private String username;
     private String password;
-    private Boolean loggedIn = false;
+    public Boolean loggedIn = false;
 
     // Verification control
     public String registerUser(String firstName, String lastName, String username, String password) {
@@ -52,7 +52,7 @@ public class Login {
     }
 
     // Username verification
-    private boolean checkUserName(String username) {
+    public boolean checkUserName(String username) {
         if (username.length() <= 5 && username.contains("_")) {
             return true;
         }else {
@@ -61,7 +61,7 @@ public class Login {
     }
 
     // Password verification
-    private boolean checkPasswordComplexity(String password) {
+    public boolean checkPasswordComplexity(String password) {
         // Conditional case variables
         boolean hasUpperCase = false;
         boolean hasNumber = false;
