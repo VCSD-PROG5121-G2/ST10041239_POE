@@ -7,7 +7,7 @@ public class Login {
     private String lastName;
     private String username;
     private String password;
-    private Boolean loggedIn = false;
+    public Boolean loggedIn = false;
 
     // Verification control
     public String registerUser(String firstName, String lastName, String username, String password) {
@@ -37,17 +37,22 @@ public class Login {
         return false;
     }
 
+    // Signout Handler
+    public void signOutUser() {
+        this.loggedIn = false;
+    }
+
     // Login Status handler
     public String returnLoginStatus() {
         if (this.loggedIn) {
-            return "Welcome " + this.firstName + ", " + this.lastName + "it is great to see you again";
+            return "Welcome " + this.firstName + ", " + this.lastName + ", " + "it is great to see you again";
         }
         return "Username or Password incorreect, please try again.";
 
     }
 
     // Username verification
-    private boolean checkUserName(String username) {
+    public boolean checkUserName(String username) {
         if (username.length() <= 5 && username.contains("_")) {
             return true;
         }else {
@@ -56,7 +61,7 @@ public class Login {
     }
 
     // Password verification
-    private boolean checkPasswordComplexity(String password) {
+    public boolean checkPasswordComplexity(String password) {
         // Conditional case variables
         boolean hasUpperCase = false;
         boolean hasNumber = false;
