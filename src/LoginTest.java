@@ -24,7 +24,7 @@ class LoginTest {
      */
     @Test
     void registerUser() {
-        //Valid Username
+        // Valid Username
         String vUsername = "kyl_1";
         String vUsernameRegisterStatus = login.registerUser(firstName, lastName, vUsername, fakePassword);
         login.loginUser(vUsername, fakePassword);
@@ -63,7 +63,7 @@ class LoginTest {
         assertFalse(iUsernameResult);
     }
 
-    void checkPassword() {
+    void checkPasswordComplexity() {
         // Valid Password
         boolean vPasswordResult = login.checkPasswordComplexity("Ch&&sec@ke99!");
         assertTrue(vPasswordResult);
