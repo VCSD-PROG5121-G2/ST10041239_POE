@@ -9,8 +9,8 @@ public class Main {
 
     public static void main(String[] args) {
         // Signup and Login User
-//        SignUpHandler();
-//        LoginHandler();
+        SignUpHandler();
+        LoginHandler();
 
         // Loop to manage the Choices of the user
         while (login.returnLoginStatus() != "Username or Password incorreect, please try again.") {
