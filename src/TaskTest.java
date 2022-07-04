@@ -1,5 +1,4 @@
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class TaskTest {
@@ -7,19 +6,17 @@ class TaskTest {
     Task task = new Task();
 
     /**
-     * Because all created Tasks are more treated as Obejcts, the respective
-     * TaskItems are created to store the necessary and respective data.
-     * The taskID's are manually generated as if they were in "Main"
+     * Creates valid IDs
+     * Adds tasks to Task
      */
     String task1ID = task.createTaskID("Login Feature", 0,"Roby Harrison");
     String task2ID = task.createTaskID("Add Task Feature", 1, "Mike Smith");
-    TaskItem task1 = new TaskItem("Login Feature", 0, "Create login to authenticate users", "Roby Harrison", 8, task1ID, "To Do");
-    TaskItem task2 = new TaskItem("Add Task Feature", 1, "Create Add Task feature to add task users", "Mike Smith", 10, task2ID, "Doing");
 
     @Test
     void checkTaskDescription() {
+
         // Valid Description
-        String vTaskDescription = task1.getDescription();
+        String vTaskDescription = "Create login to authenticate users";
         assertEquals(true, task.checkTaskDescription(vTaskDescription));
 
         // Invalid Descripton
@@ -36,10 +33,9 @@ class TaskTest {
     void retrunTotalHours() {
         /**
          * Task 1 of "returnTotalHours" test
-          */
-        // Add TaskItems to the Task class
-        task.addTask(task1);
-        task.addTask(task2);
+         */
+        task.addTask("Login Feature", 0, "Create login to authenticate users", "Roby Harrison", 8, "To Do", task1ID);
+        task.addTask("Add Task Feature", 1, "Create Add Task feature to add task users", "Mike Smith", 10, "Doing", task2ID);
 
         // Test 1
         int totalHours1 = task.retrunTotalHours();
@@ -48,24 +44,16 @@ class TaskTest {
         /**
          * Task 2 of "returnTotalHours" test
          */
-        // Creating appropriate Task data
+        // Creating appropriate Task data & adding it to the "newTask"
         Task newTask = new Task();
-        TaskItem task3 = new TaskItem("Login Feature", 0, "Create login to authenticate users", "Roby Harrison", 10, task1ID, "To Do");
-        TaskItem task4 = new TaskItem("Login Feature",  1,"Create login to authenticate users", "Roby Harrison", 12, task1ID, "To Do");
-        TaskItem task5 = new TaskItem("Login Feature",  2,"Create login to authenticate users", "Roby Harrison", 55, task1ID, "To Do");
-        TaskItem task6 = new TaskItem("Login Feature",  3,"Create login to authenticate users", "Roby Harrison", 11, task1ID, "To Do");
-        TaskItem task7 = new TaskItem("Login Feature", 3,"Create login to authenticate users", "Roby Harrison", 1, task1ID, "To Do");
-
-        // Adding all TaskItems to Task
-        newTask.addTask(task3);
-        newTask.addTask(task4);
-        newTask.addTask(task5);
-        newTask.addTask(task6);
-        newTask.addTask(task7);
+        newTask.addTask("Login Feature", 0, "Create login to authenticate users", "Roby Harrison", 10, task1ID, "To Do");
+        newTask.addTask("Login Feature",  1,"Create login to authenticate users", "Roby Harrison", 12, task1ID, "To Do");
+        newTask.addTask("Login Feature",  2,"Create login to authenticate users", "Roby Harrison", 55, task1ID, "To Do");
+        newTask.addTask("Login Feature",  3,"Create login to authenticate users", "Roby Harrison", 11, task1ID, "To Do");
+        newTask.addTask("Login Feature", 3,"Create login to authenticate users", "Roby Harrison", 1, task1ID, "To Do");
 
         // Assertion Test
         int totalHours2 = newTask.retrunTotalHours();
         assertEquals(89, totalHours2);
-
     }
 }
