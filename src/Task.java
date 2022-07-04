@@ -7,12 +7,12 @@ public class Task {
      * Lines 10, and 14 were Adapted from a Java Hungry blog post on 5/06/2022
      * Blog: https://javahungry.blogspot.com/2020/04/append-array-java.html
      */
-    private List<String> taskIDs = new ArrayList<String>();
-    private List<String> taskNames = new ArrayList<String>();
-    private List<String> developers = new ArrayList<String>();
-    private List<String> taskStatus = new ArrayList<String>();
-    private List<Integer> taskDurations = new ArrayList<Integer>();
-    private List<String> taskDescriptions = new ArrayList<String>();
+    public List<String> taskIDs = new ArrayList<String>();
+    public List<String> taskNames = new ArrayList<String>();
+    public List<String> developers = new ArrayList<String>();
+    public List<String> taskStatus = new ArrayList<String>();
+    public List<Integer> taskDurations = new ArrayList<Integer>();
+    public List<String> taskDescriptions = new ArrayList<String>();
 
 
     // Appends Task to the taskItem array
@@ -91,7 +91,7 @@ public class Task {
     }
 
     // Question 3.2.b - Searches for the Task with highest duration
-    public void findLongestTask() {
+    public String findLongestTask() {
         // Stores the index value of the largest element in the array
         int largest = 0;
 
@@ -104,7 +104,10 @@ public class Task {
             if ( taskDurations.get(i) > taskDurations.get(largest) ) largest = i;
         }
 
+        String data = developers.get(largest) + ", " + taskDurations.get(largest) + ";";
         JOptionPane.showMessageDialog(null, "Longest Task Details:\nDeveloper: " + developers.get(largest) + "\nDuration: " + taskDurations.get(largest));
+
+        return data;
     }
 
     // Question 3.2.c - Search for Task by Task Name
