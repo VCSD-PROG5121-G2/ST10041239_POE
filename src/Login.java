@@ -7,7 +7,7 @@ public class Login {
     private String lastName;
     private String username;
     private String password;
-    public Boolean loggedIn = false;
+    public Boolean loggedIn = true;
 
     // Verification control
     public String registerUser(String firstName, String lastName, String username, String password) {

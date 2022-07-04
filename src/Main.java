@@ -5,10 +5,12 @@ public class Main {
     static Login login = new Login();
     static Task task = new Task();
 
+    static boolean reportMenuOpen = false;
+
     public static void main(String[] args) {
         // Signup and Login User
-        SignUpHandler();
-        LoginHandler();
+//        SignUpHandler();
+//        LoginHandler();
 
         // Loop to manage the Choices of the user
         while (login.returnLoginStatus() != "Username or Password incorreect, please try again.") {
@@ -19,10 +21,11 @@ public class Main {
             // Used an Swtich statment as it less verbose than an If statement
             switch (userOption) {
                 case "1":
-                    taskCreationHandler();
+                    TaskCreationHandler();
                     break;
                 case "2":
-                    JOptionPane.showMessageDialog(null, "Coming Soon");
+                    reportMenuOpen = true;
+                    ReportHandler();
                     break;
                 case "3":
                     JOptionPane.showMessageDialog(null, "Thank you for using EasyKanban\n\nSee you next time!");
@@ -75,7 +78,7 @@ public class Main {
     }
 
     // Task Creation Handler
-    private static void taskCreationHandler() {
+    private static void TaskCreationHandler() {
         int amountOfTasks = Integer.parseInt(JOptionPane.showInputDialog(null, "Please enter the amount of Tasks you wish to create"));
 
         // Controlled loop to repeat Task creations based on the amount of Tasks wished to be created by the User
@@ -110,17 +113,92 @@ public class Main {
             String taskID = task.createTaskID(taskName, i, taskDeveloper);
 
             // TaskItem object is created & added to the array of the Task "manager" class
-            TaskItem newTask = new TaskItem(taskName, i,taskDescription, taskDeveloper, taskDuration, taskStatus, taskID);
-            task.addTask(newTask);
+            task.addTask(taskName, i,taskDescription, taskDeveloper, taskDuration, taskStatus, taskID);
             JOptionPane.showMessageDialog(null, "Task successfully captured");
 
             // Print the Task details of the currently created
-            String details = task.printTaskDetails(newTask);
+            String details = task.printTaskDetails(i);
             JOptionPane.showMessageDialog(null, details);
         }
 
         // Displaying the total hours of created Tasks
         int totalHours = task.retrunTotalHours();
         JOptionPane.showMessageDialog(null, "Total Hours for Tasks entered: " + totalHours);
+    }
+
+    public static void ReportHandler() {
+       while(reportMenuOpen) {
+
+           // Using a string to stop the program from crashing when non-numeric values are inputted
+           String userOption = JOptionPane.showInputDialog(null, "Welcome To Report.\nEnter your choice:\n\n1: Display Done Tasks\n2: Show Longest Task\n3: Search by Task Name\n4: Find all Tasks associated by Developer\n5: Remove Task by Task Name\n6: Display Reports\n7: Go Back");
+
+           // Used an Swtich statment as it less verbose than an If statement
+           switch (userOption) {
+               case "1":
+                   task.findFinishedTasks();
+                   break;
+               case "2":
+                   task.findLongestTask();
+                   break;
+               case "3":
+                   searchByTaskNameHandler();
+                   break;
+               case "4":
+                    searchByDeveloperHandler();
+                   break;
+               case "5":
+                    deleteTaskHandler();
+                   break;
+               case "6":
+                   task.displayAllTasks();
+                   break;
+               case "7":
+                   reportMenuOpen = false;
+                   break;
+               default:
+                   JOptionPane.showMessageDialog(null, "Invalid input, please try again.");
+           }
+       }
+    }
+
+    public static void searchByTaskNameHandler() {
+        while (true) {
+            String taskName = JOptionPane.showInputDialog(null, "Please enter a valid Task Name: ");
+            boolean found = task.findByTaskName(taskName);
+
+            if(found) {
+                break;
+            }else {
+                JOptionPane.showMessageDialog(null, "Couldn't find task of Task Name: " + taskName);
+                continue;
+            }
+        }
+    }
+
+    public static void searchByDeveloperHandler() {
+        while (true) {
+            String developerName = JOptionPane.showInputDialog(null, "Please enter a valid Developer name: ");
+            boolean found = task.findByDeveloper(developerName);
+
+            if(found) {
+                break;
+            }else {
+                JOptionPane.showMessageDialog(null, "Couldn't find task associated with Developer: " + developerName);
+                continue;
+            }
+        }
+    }
+
+    public static void deleteTaskHandler() {
+        while (true) {
+            String taskName = JOptionPane.showInputDialog(null, "Please enter a valid Task Name: ");
+            boolean deleted = task.deleteTask(taskName);
+
+            if (deleted) {
+                break;
+            }else {
+                continue;
+            }
+        }
     }
 }

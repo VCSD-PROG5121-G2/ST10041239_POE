@@ -7,11 +7,22 @@ public class Task {
      * Lines 10, and 14 were Adapted from a Java Hungry blog post on 5/06/2022
      * Blog: https://javahungry.blogspot.com/2020/04/append-array-java.html
      */
-    private List<TaskItem> taskItems = new ArrayList<TaskItem>(); // List of all the created Tasks
+    public List<String> taskIDs = new ArrayList<String>();
+    public List<String> taskNames = new ArrayList<String>();
+    public List<String> developers = new ArrayList<String>();
+    public List<String> taskStatus = new ArrayList<String>();
+    public List<Integer> taskDurations = new ArrayList<Integer>();
+    public List<String> taskDescriptions = new ArrayList<String>();
+
 
     // Appends Task to the taskItem array
-    public void addTask(TaskItem task) {
-        taskItems.add(task);
+    public void addTask(String name, int number, String description, String developerDetails, int duration, String status, String id) {
+        taskIDs.add(id);
+        taskNames.add(name);
+        developers.add(developerDetails);
+        taskStatus.add(status);
+        taskDurations.add(duration);
+        taskDescriptions.add(description);
     }
 
     /**
@@ -42,8 +53,8 @@ public class Task {
     }
 
     // Prints out the full details of the Task passed in
-    public String printTaskDetails(TaskItem task) {
-        String taskDetails = "Here are your Task's details:\n\nStatus: " + task.getStatus() + "\nDeveloper Details: " + task.getDeveloperDetails() + "\nTask Number: " + task.getNumber() + "\nName: " + task.getName() + "\nDescription: " + task.getDescription() + "\nID: " + task.getID() + "\nDuration: " + task.getDuration() + "hrs";
+    public String printTaskDetails(int taskNumber) {
+        String taskDetails = "Here are your Task's details:\n\nStatus: " + taskStatus.get(taskNumber) + "\nDeveloper Details: " + developers.get(taskNumber) + "\nTask Number: " + taskNumber + "\nName: " + taskNames.get(taskNumber) + "\nDescription: " + taskDescriptions.get(taskNumber) + "\nID: " + taskIDs.get(taskNumber) + "\nDuration: " + taskDurations.get(taskNumber) + "hrs";
         return taskDetails;
     }
 
@@ -51,14 +62,98 @@ public class Task {
     public int retrunTotalHours() {
         int totalHours = 0;
 
-        for (int i = 0; i < this.taskItems.toArray().length; i++) {
+        for (int i = 0; i < this.taskDurations.toArray().length; i++) {
             /**
-             * Line 58 was adopted from a Javapoint blog post on 05/06/2022
-             * Blog Post: https://www.javatpoint.com/java-list
+             * Line 70 was adapted from 'w3schools' blog post on 03/07/2022
+             * Blog Post: https://www.w3schools.com/java/java_arraylist.asp
              */
-            totalHours += taskItems.get(i).getDuration();
+            totalHours += taskDurations.get(i);
         }
 
         return totalHours;
+    }
+
+    public boolean findFinishedTasks() {
+        boolean found = false;
+
+        for (int i = 0; i < this.taskStatus.toArray().length; i++) {
+            if (taskStatus.get(i).equals("Done")) {
+                found = true;
+                JOptionPane.showMessageDialog(null, "Details:\nTask Name: " + taskNames.get(i) + "\nDeveloper: " + developers.get(i)
+                        + "\nDuration: " + taskDurations.get(i));
+            }
+        }
+
+        return found;
+    }
+
+    public void findLongestTask() {
+
+        int largest = 0;
+        for ( int i = 1; i < taskDurations.toArray().length; i++ )
+        {
+            if ( taskDurations.get(i) > taskDurations.get(largest) ) largest = i;
+        }
+//        for (int i = 0; i < this.taskDurations.toArray().length; i++) {
+//            if (taskDurations.get(i) > taskDurations.get(i + 1)) {
+//                tempLongest = taskDurations.get(i);
+//                index = i;
+//            }
+//        }
+
+        JOptionPane.showMessageDialog(null, "Longest Task Details:\nDeveloper: " + developers.get(largest) + "\nDuration: " + taskDurations.get(largest));
+    }
+
+    public boolean findByTaskName(String taskName) {
+        boolean found = false;
+
+        for (int i = 0; i < this.taskNames.toArray().length; i++) {
+            if (taskNames.get(i).equals(taskName)) {
+                found = true;
+                JOptionPane.showMessageDialog(null, "Details:\nTask Name: " + taskNames.get(i) + "\nDeveloper: " + developers.get(i)
+                        + "\nStatus: " + taskStatus.get(i));
+            }
+        }
+
+        return found;
+    }
+
+    public boolean findByDeveloper(String developer) {
+        boolean found = false;
+
+        for (int i = 0; i < this.developers.toArray().length; i++) {
+            if (developers.get(i).equals(developer)) {
+                found = true;
+                JOptionPane.showMessageDialog(null, "Details:\nTask Name: " + taskNames.get(i) +  "\nStatus: " + taskStatus.get(i));
+            }
+        }
+
+        return found;
+    }
+
+    public boolean deleteTask(String taskName) {
+        boolean deleted = true;
+
+        for (int i = 0; i < this.taskNames.toArray().length; i++) {
+            if (taskNames.get(i).equals(taskName)) {
+                deleted = true;
+                taskIDs.remove(i);
+                taskNames.remove(i);
+                developers.remove(i);
+                taskStatus.remove(i);
+                taskDurations.remove(i);
+                taskDescriptions.remove(i);
+            }
+        }
+
+        return deleted;
+    }
+
+    public void displayAllTasks() {
+        for (int i = 0; i < this.taskNames.toArray().length; i++) {
+            JOptionPane.showMessageDialog(null, "Here are your Task's details:\n\nStatus: " + taskStatus.get(i) + "\nDeveloper Details: "
+                    + developers.get(i) +  "\nName: " + taskNames.get(i) + "\nDescription: "
+                    + taskDescriptions.get(i) + "\nID: " + taskIDs.get(i) + "\nDuration: " + taskDurations.get(i) + "hrs");
+        }
     }
 }
