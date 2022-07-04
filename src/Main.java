@@ -112,7 +112,7 @@ public class Main {
             // Generating a respective TaskID for the newly created Task
             String taskID = task.createTaskID(taskName, i, taskDeveloper);
 
-            // TaskItem object is created & added to the array of the Task "manager" class
+            // Calling Task class to add Task Details to respective arrays
             task.addTask(taskName, i,taskDescription, taskDeveloper, taskDuration, taskStatus, taskID);
             JOptionPane.showMessageDialog(null, "Task successfully captured");
 
@@ -126,9 +126,9 @@ public class Main {
         JOptionPane.showMessageDialog(null, "Total Hours for Tasks entered: " + totalHours);
     }
 
+    // Report Menue Handler
     public static void ReportHandler() {
        while(reportMenuOpen) {
-
            // Using a string to stop the program from crashing when non-numeric values are inputted
            String userOption = JOptionPane.showInputDialog(null, "Welcome To Report.\nEnter your choice:\n\n1: Display Done Tasks\n2: Show Longest Task\n3: Search by Task Name\n4: Find all Tasks associated by Developer\n5: Remove Task by Task Name\n6: Display Reports\n7: Go Back");
 
@@ -161,6 +161,7 @@ public class Main {
        }
     }
 
+    // Handles Front End functionality of "task.findByTaskName"
     public static void searchByTaskNameHandler() {
         while (true) {
             String taskName = JOptionPane.showInputDialog(null, "Please enter a valid Task Name: ");
@@ -175,6 +176,7 @@ public class Main {
         }
     }
 
+    // Handles Front End functionality of "task.findByDeveloper"
     public static void searchByDeveloperHandler() {
         while (true) {
             String developerName = JOptionPane.showInputDialog(null, "Please enter a valid Developer name: ");
@@ -189,6 +191,7 @@ public class Main {
         }
     }
 
+    // Handles Front End functionality of "task.deleteTask"
     public static void deleteTaskHandler() {
         while (true) {
             String taskName = JOptionPane.showInputDialog(null, "Please enter a valid Task Name: ");

@@ -7,12 +7,12 @@ public class Task {
      * Lines 10, and 14 were Adapted from a Java Hungry blog post on 5/06/2022
      * Blog: https://javahungry.blogspot.com/2020/04/append-array-java.html
      */
-    public List<String> taskIDs = new ArrayList<String>();
-    public List<String> taskNames = new ArrayList<String>();
-    public List<String> developers = new ArrayList<String>();
-    public List<String> taskStatus = new ArrayList<String>();
-    public List<Integer> taskDurations = new ArrayList<Integer>();
-    public List<String> taskDescriptions = new ArrayList<String>();
+    private List<String> taskIDs = new ArrayList<String>();
+    private List<String> taskNames = new ArrayList<String>();
+    private List<String> developers = new ArrayList<String>();
+    private List<String> taskStatus = new ArrayList<String>();
+    private List<Integer> taskDurations = new ArrayList<Integer>();
+    private List<String> taskDescriptions = new ArrayList<String>();
 
 
     // Appends Task to the taskItem array
@@ -73,9 +73,12 @@ public class Task {
         return totalHours;
     }
 
+    // Question 3.2.a - Displays infomation of all Tasks with the status "Done"
     public boolean findFinishedTasks() {
+        // Allows the front end to know whether to exit or continue out of loop
         boolean found = false;
 
+        // Searching through each element in the array, and selecting the one that matches the critrea
         for (int i = 0; i < this.taskStatus.toArray().length; i++) {
             if (taskStatus.get(i).equals("Done")) {
                 found = true;
@@ -87,26 +90,29 @@ public class Task {
         return found;
     }
 
+    // Question 3.2.b - Searches for the Task with highest duration
     public void findLongestTask() {
-
+        // Stores the index value of the largest element in the array
         int largest = 0;
+
+        /**
+         * Lines 102, and 104 were Adapted from a Grepper blog post on 04/07/2022
+         * Blog: https://www.codegrepper.com/code-examples/java/java+function+that+returns+the+index+of+the+largest+value+in+an+array
+         */
         for ( int i = 1; i < taskDurations.toArray().length; i++ )
         {
             if ( taskDurations.get(i) > taskDurations.get(largest) ) largest = i;
         }
-//        for (int i = 0; i < this.taskDurations.toArray().length; i++) {
-//            if (taskDurations.get(i) > taskDurations.get(i + 1)) {
-//                tempLongest = taskDurations.get(i);
-//                index = i;
-//            }
-//        }
 
         JOptionPane.showMessageDialog(null, "Longest Task Details:\nDeveloper: " + developers.get(largest) + "\nDuration: " + taskDurations.get(largest));
     }
 
+    // Question 3.2.c - Search for Task by Task Name
     public boolean findByTaskName(String taskName) {
+        // Allows the front end to know whether to exit or continue out of loop
         boolean found = false;
 
+        // Searching through each element in the array, and selecting the one that matches the critrea
         for (int i = 0; i < this.taskNames.toArray().length; i++) {
             if (taskNames.get(i).equals(taskName)) {
                 found = true;
@@ -118,9 +124,12 @@ public class Task {
         return found;
     }
 
+    // Question 3.2.d - Search for Tasks associated to Developer
     public boolean findByDeveloper(String developer) {
+        // Allows the front end to know whether to exit or continue out of loop
         boolean found = false;
 
+        // Searching through each element in the array, and selecting the one that matches the critrea
         for (int i = 0; i < this.developers.toArray().length; i++) {
             if (developers.get(i).equals(developer)) {
                 found = true;
@@ -131,11 +140,15 @@ public class Task {
         return found;
     }
 
+    // Question 3.2.e - Search for Task with Task Name and Delete it
     public boolean deleteTask(String taskName) {
+        // Allows the front end to know whether to exit or continue out of loop
         boolean deleted = true;
 
+        // Search through each element in the array, and selecting the one that matches the critea
         for (int i = 0; i < this.taskNames.toArray().length; i++) {
             if (taskNames.get(i).equals(taskName)) {
+                // Removews Task details from elements
                 deleted = true;
                 taskIDs.remove(i);
                 taskNames.remove(i);
@@ -149,7 +162,9 @@ public class Task {
         return deleted;
     }
 
+    // Question 3.2.f - Diplay all Tasks to the User
     public void displayAllTasks() {
+        // Iterating through every element in array
         for (int i = 0; i < this.taskNames.toArray().length; i++) {
             JOptionPane.showMessageDialog(null, "Here are your Task's details:\n\nStatus: " + taskStatus.get(i) + "\nDeveloper Details: "
                     + developers.get(i) +  "\nName: " + taskNames.get(i) + "\nDescription: "
