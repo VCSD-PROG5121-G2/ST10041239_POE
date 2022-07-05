@@ -166,9 +166,9 @@ public class Main {
     public static void searchByTaskNameHandler() {
         while (true) {
             String taskName = JOptionPane.showInputDialog(null, "Please enter a valid Task Name: ");
-            boolean found = task.findByTaskName(taskName);
+            String found = task.findByTaskName(taskName);
 
-            if(found) {
+            if(!found.equals("")) {
                 break;
             }else {
                 JOptionPane.showMessageDialog(null, "Couldn't find task of Task Name: " + taskName);
@@ -181,9 +181,9 @@ public class Main {
     public static void searchByDeveloperHandler() {
         while (true) {
             String developerName = JOptionPane.showInputDialog(null, "Please enter a valid Developer name: ");
-            boolean found = task.findByDeveloper(developerName);
+            String found = task.findByDeveloper(developerName);
 
-            if(found) {
+            if(!found.equals("")) {
                 break;
             }else {
                 JOptionPane.showMessageDialog(null, "Couldn't find task associated with Developer: " + developerName);

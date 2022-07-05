@@ -111,36 +111,36 @@ public class Task {
     }
 
     // Question 3.2.c - Search for Task by Task Name
-    public boolean findByTaskName(String taskName) {
+    public String findByTaskName(String taskName) {
         // Allows the front end to know whether to exit or continue out of loop
-        boolean found = false;
+        String data = "";
 
         // Searching through each element in the array, and selecting the one that matches the critrea
         for (int i = 0; i < this.taskNames.toArray().length; i++) {
             if (taskNames.get(i).equals(taskName)) {
-                found = true;
+                data = developers.get(i) + ", " + taskNames.get(i);
                 JOptionPane.showMessageDialog(null, "Details:\nTask Name: " + taskNames.get(i) + "\nDeveloper: " + developers.get(i)
                         + "\nStatus: " + taskStatus.get(i));
             }
         }
 
-        return found;
+        return data;
     }
 
     // Question 3.2.d - Search for Tasks associated to Developer
-    public boolean findByDeveloper(String developer) {
+    public String findByDeveloper(String developer) {
         // Allows the front end to know whether to exit or continue out of loop
-        boolean found = false;
+        String data = "";
 
         // Searching through each element in the array, and selecting the one that matches the critrea
         for (int i = 0; i < this.developers.toArray().length; i++) {
             if (developers.get(i).equals(developer)) {
-                found = true;
+                data = taskNames.get(i);
                 JOptionPane.showMessageDialog(null, "Details:\nTask Name: " + taskNames.get(i) +  "\nStatus: " + taskStatus.get(i));
             }
         }
 
-        return found;
+        return data;
     }
 
     // Question 3.2.e - Search for Task with Task Name and Delete it

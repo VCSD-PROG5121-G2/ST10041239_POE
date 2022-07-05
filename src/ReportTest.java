@@ -51,7 +51,24 @@ public class ReportTest {
     void findByTaskName() {
         addTestData();
 
-//        assertEquals("Mike Smith, Create Login", task.findByTaskName());
+        assertEquals("Mike Smith, Create Login", task.findByTaskName("Create Login"));
     }
+
+    @Test
+    void findByDeveloper() {
+        addTestData();
+
+        assertEquals("Create Reports", task.findByDeveloper("Samantha Paulson"));
+    }
+
+    @Test
+    void deleteTask() {
+        addTestData();
+
+        // If "deleteTask" returns True, task has been deleted
+        assertEquals(true, task.deleteTask("Create Reports"));
+    }
+
+
 
 }
